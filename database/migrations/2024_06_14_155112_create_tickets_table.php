@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
+            $table->string('description', 2000);
             $table->string('problem', 100);
             $table->foreign("problem")
                 ->references("problem")

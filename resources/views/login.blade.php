@@ -1,74 +1,32 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Вход</title>
-    <style>
-        body {
-            padding: 100px 200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        form {
-            padding: 1em 2em;
-            background-color: cornflowerblue;
-            color: white;
-            border-radius: 15px;
-            width: 20vw;
-            height: 40vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .data-form-block {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        input {
-            margin-bottom: 2.5em;
-        }
-        .data-form-block input {
-            width: 300px;
-            height: 25px;
-            border-radius: 10px;
-        }
-        a {
-            color: white;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .submit-button {
-            height: 50px;
-            width: 150px;
-            border-radius: 10px;
-        }
-    </style>
-</head>
-<body>
-    <form action="" method="post">
-        @csrf
-        <div class="data-form-block">
-            <label for="name">Логин</label>
-            <input type="text" name="name" id="name" />
-        </div>
-        <div class="data-form-block">
-            <label for="password">Пароль</label>
-            <input type="text" name="password" id="password" />
-        </div>
-        <div>
-            <input type="submit" value="Вход" class="submit-button" />
-        </div>
-        <div>
-            <a href="{{ route('signup') }}" >Не зарегистрированы?</a>
-        </div>
-    </form>
-</body>
-</html>
+@extends('layouts.main')
+
+@section('title', 'Авторизация')
+
+@section('content')
+<h2 class="text-2xl font-bold mb-6 text-center">Авторизация</h2>
+<form method="POST" action="{{ route('auth') }}">
+    @csrf
+
+    <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Имя пользователя</label>
+        <input id="name" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm p-2" type="text" name="name" value="{{ old('name') }}" required autofocus>
+        @error('name')
+        <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <div class="mt-4">
+        <label for="password" class="block text-sm font-medium text-gray-700">Пароль</label>
+        <input id="password" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm p-2" type="password" name="password" required>
+        @error('password')
+        <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <div class="flex items-center justify-end mt-4">
+        <button class="ml-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+            Вход
+        </button>
+    </div>
+</form>
+@endsection

@@ -1,15 +1,38 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SignupController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TicketController;
 
+Route::group(['controller' => SignupController::class, 'middleware' => 'guest'], function () {
+    Route::get('/signup', 'showSignupForm')
+        ->name('showSignupForm');
+    Route::post('/signup', 'createUser')
+        ->name('createUser');
+});
 
-Route::post('/signup', function () {
-    return view('signup');
-})->name('signup');
+Route::group(['controller' => AuthController::class], function () {
+    Route::get('/login', 'showAuthForm')
+        ->name('showAuthForm')
+        ->middleware('guest');
+    Route::post('/login', 'auth')
+        ->name('auth')
+        ->middleware('guest');
+    Route::post('/logout', 'logout')
+        ->name('logout')
+        ->middleware('auth');
+});
 
-Route::post('/login', function () {
-    return view('login');
-})->name('login');
-
-
+Route::group(['controller' => TicketController::class], function () {
+    Route::get('/tickets', 'ticketsView')
+        ->name('tickets')
+        ->middleware('role:admin');
+    Route::get('/create/ticket', 'showTicketForm')
+        ->name('showTicketForm')
+        ->middleware('auth');
+    Route::post('/create/ticket', 'createTicket')
+        ->name('createTicket')
+        ->middleware('auth');
+});
 
