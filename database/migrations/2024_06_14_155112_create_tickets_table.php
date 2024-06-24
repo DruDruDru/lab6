@@ -25,6 +25,11 @@ return new class extends Migration
                 ->on("importancies")
                 ->nullOnDelete();
             $table->string('photo')->nullable();
+            $table->integer('user');
+            $table->foreign('user')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

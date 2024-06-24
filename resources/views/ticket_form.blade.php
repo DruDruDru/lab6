@@ -22,7 +22,7 @@
 
     <div class="mb-4">
         <label for="description" class="block text-sm font-medium text-gray-700">Описание проблемы</label>
-        <textarea name="description" id="description" class="block mt-1 w-full border-gray-300 resize-none rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+        <textarea name="description" id="description" class="block mt-1 w-full border-gray-300 resize-none rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">{{ old('description') }}</textarea>
         @error('description')
         <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
         @enderror
@@ -46,6 +46,10 @@
         @error('importance')
         <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
         @enderror
+    </div>
+
+    <div class="flex justify-center">
+        <span>{{ $success ?? null }}</span>
     </div>
 
     <div class="flex items-center justify-end mt-4">

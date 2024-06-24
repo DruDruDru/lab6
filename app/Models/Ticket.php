@@ -11,6 +11,13 @@ class Ticket extends Model
 
     protected $fillable = [
         'description', 'problem',
-        'importance', 'photo'
+        'importance', 'photo',
+        'user', 'status',
+        'answer'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

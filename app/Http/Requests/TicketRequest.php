@@ -39,7 +39,7 @@ class TicketRequest extends FormRequest
             'problem_theme.required' => 'Тип проблемы обязательна',
             'problem_theme.max' => 'Тип проблемы должна быть менее 100 символов',
             'photo.mimes' => 'Расширение файла должно быть: jpg, jpeg, png',
-            'photo.max' => 'Максимальный размер файла 2048 Кб'
+            'photo.max' => 'Максимальный размер файла 2048 Кб',
         ];
     }
 }

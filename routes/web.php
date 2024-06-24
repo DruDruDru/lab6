@@ -34,5 +34,16 @@ Route::group(['controller' => TicketController::class], function () {
     Route::post('/create/ticket', 'createTicket')
         ->name('createTicket')
         ->middleware('auth');
+    Route::post('/update/status', 'updateStatus')
+        ->name('updateStatus')
+        ->middleware('role:admin');
+    Route::get('/do/answer/{ticketId}', 'showAnswerForm')
+        ->name('showAnswerForm')
+        ->middleware('role:admin');
+    Route::post('/do/answer/{ticketId}', 'doAnswer')
+        ->name('doAnswer')
+        ->middleware('role:admin');
+    Route::match(['get', 'post'], '/notices/{userId}', 'yourTickets')
+        ->name('yourTickets')
+        ->middleware('role:default');
 });
-
