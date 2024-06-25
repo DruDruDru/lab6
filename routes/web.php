@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\AuthController;
@@ -46,4 +47,12 @@ Route::group(['controller' => TicketController::class], function () {
     Route::match(['get', 'post'], '/notices/{userId}', 'yourTickets')
         ->name('yourTickets')
         ->middleware('role:default');
+});
+
+Route::get('', function () {
+    if (Auth::check()) {
+        return redirect()->route('showTicketForm');
+    } else {
+        return redirect()->route('showAuthForm');
+    }
 });
